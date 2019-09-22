@@ -21,12 +21,14 @@ app.get('/email/:key', require("./authentication/email"))
 //app.post('/recipient/verify', require("./recipient/verify"))
 app.get('/recipient/profile/:id', require("./recipient/profile"))
 app.get('/recipient/transactions/:id', require("./recipient/transactions"))
-//app.post('/recipient/purchase', require("./recipient/purchase"))
-//app.post('recipient/classify', require("./recipient/classify"))
+app.get('/recipient/transaction/:id', require("./recipient/transaction"))
+app.post('/recipient/purchase', require("./recipient/purchase"))
+//app.post('recipient/upload', require("./recipient/upload"))
+app.post('recipient/classify', require("./recipient/classify"))
 
 //Donor
 //app.post('/donor/register', require("./donor/register"))
-//app.post('/donor/donate', require("./donor/donate"))
+app.post('/donor/donate', require("./donor/donate"))
 
 //test endpoint
 app.post('/test', require("./test"))
