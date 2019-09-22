@@ -9,11 +9,12 @@ module.exports = async function donate(req, res) {
 
         //Charge donor
 
+
         //Update funds if successful payment
         let update_recipient = "UPDATE `recipient` SET `savings` = `savings` + ? WHERE `recipient_id` = ?;"
         let result = db.connection.query(update_recipient, [amount, recipient_id]);
 
-        let insert_transaction = "INSERT INTO `transaction` (`tx_type`, `amount`, `donor_id`, `recipient_id`, `category`, `purchase_order_id`, `date`) VALUES (1, ?, ?, ?, '', '', CURRENT_TIMESTAMP);"
+        let insert_transaction = "INSERT INTO `transaction` (`tx_type`, `amount`, `donor_id`, `recipient_id`, `category`, `purchase_order_id`, `date`) VALUES (1, ?, ?, ?, '', NULL, CURRENT_TIMESTAMP);"
         result = db.connection.query(insert_transaction, [amount, donor_id, recipient_id,]);
 
  	 	res.send({code: "Donation has been processed"})
