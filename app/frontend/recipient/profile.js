@@ -7,6 +7,7 @@ module.exports = async function profile(req, res) {
         const [rows] = await db.connection.query("SELECT `is_verified`,`bio`,`alias` FROM `recipient` WHERE `recipient_id` = ?;", [req.params.id]);
         let is_verified = rows[0].is_verified
         let bio = rows[0].bio
+        let alias = rows[0].alias
         console.debug("Recipient is_verified = %s", is_verified)
         console.debug("Recipient bio = %s", bio)
         console.debug("Recipient alias = %s", alias)
