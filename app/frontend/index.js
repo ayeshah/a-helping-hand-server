@@ -9,27 +9,24 @@ Date.prototype.toMysqlFormat = function() {
 
 //define the endpoints
 
-//authentication related endpoints
-app.post('/login', require("./authentication/login"))
+//Authentication
+app.post('/login', require("./authentication/login")) //done
 app.post('/signup', require("./authentication/signup"))
 app.post('/reset_password', require('./authentication/resetPassword'))
 app.post('/update_password', require('./authentication/updatePassword'))
 app.get('/email/:key', require("./authentication/email"))
 
-//user related endpoints
-// app.get('/clam_balance', require("./user/clamBalance"))
-app.get('/user_data/:username', require("./user/userData"))
-app.get('/all_users', require("./user/allUsers"))
-app.post('/invite_user', require("./user/inviteUser"))
+//Recipient
+//app.post('/recipient/register', require("./recipient/register.js"))
+//app.post('/recipient/verify', require("./recipient/verify"))
+app.get('/recipient/profile/:id', require("./recipient/profile"))
+app.get('/recipient/transactions/:id', require("./recipient/transactions"))
+//app.post('/recipient/purchase', require("./recipient/purchase"))
+//app.post('recipient/classify', require("./recipient/classify"))
 
-
-//investment related endpoints
-// app.post('/all_investments', require("./investment/allInvestments"))
-
-//stats
-// app.post('/stats/daily_registered_users', require("./stats/registeredUsers"))
-// app.get('/stats/total_users', require("./stats/totalUsers"))
-
+//Donor
+//app.post('/donor/register', require("./donor/register"))
+//app.post('/donor/donate', require("./donor/donate"))
 
 //test endpoint
 app.post('/test', require("./test"))

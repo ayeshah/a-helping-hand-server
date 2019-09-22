@@ -1,20 +1,4 @@
-var {user_model, email_model } = require('../../models')
-var { domain } = require('../../../config')
-var md5 = require('md5');
-
-
-
-async function check_referral(code){
-	let users = await user_model.get_all_users()
-	for(let i=0; i< users.length; i++){
-		console.log("refcode", md5(users[i].username).slice(0,5), "code", code)
-		if(md5(users[i].username).slice(0,5) == code){
-			return users[i].username
-		}
-	}
-	return false
-}
-module.exports = async function signup_api(req, res) {
+module.exports = async function register(req, res) {
 	try{
 		let verify = await check_referral(req.body.code)
 		console.log("verify", verify)
