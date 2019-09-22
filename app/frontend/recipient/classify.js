@@ -1,3 +1,6 @@
+var {user_model} = require('../../models')
+var db = require('../../util/mysql_connection')
+
 module.exports = async function classify(req, res) {
 	try {
         let recipient_id = req.body.recipient_id
@@ -14,14 +17,14 @@ module.exports = async function classify(req, res) {
         // classify purchases
         let transactions = {"Food": 7.00, "Clothing": 30.00, "Inelegible": 0.00}
 
-        if (transactions['Inelegible'] > 0.0) {
-            let update_recipient_strikes = "UPDATE `recipient` SET `strikes` = `strikes` + 1 WHERE `recipient_id` = ?;"
-            let result = db.connection.query(update_recipient_strikes, [recipient_id]);
-        }
-
 		let insert_transaction = "INSERT INTO `transaction` (`tx_type`, `amount`, `donor_id`, `recipient_id`, `category`, `purchase_order_id`, date`) VALUES (0, ?, '', ?, ?, ?, CURRENT_TIMESTAMP);"
         let result = db.connection.query(insert_transaction, [transactions['Food'], recipient_id, "Food", purchase_order_id]);
-        let result = db.connection.query(insert_transaction, [transactions['Clothing'], recipient_id, "Clothing", purchase_order_id]);
+        result = db.connection.query(insert_transaction, [transactions['Clothing'], recipient_id, "Clothing", purchase_order_id]);
+
+        if (transactions['Inelegible'] > 0.0) {
+            let update_recipient_strikes = "UPDATE `recipient` SET `strikes` = `strikes` + 1 WHERE `recipient_id` = ?;"
+            result = db.connection.query(update_recipient_strikes, [recipient_id]);
+        }
 
  	 	res.send({code: "Purchases have been classified"})
  	}

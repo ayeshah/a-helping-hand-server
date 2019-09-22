@@ -10,11 +10,11 @@ Date.prototype.toMysqlFormat = function() {
 //define the endpoints
 
 //Authentication
-app.post('/login', require("./authentication/login")) //done
-app.post('/signup', require("./authentication/signup"))
-app.post('/reset_password', require('./authentication/resetPassword'))
-app.post('/update_password', require('./authentication/updatePassword'))
-app.get('/email/:key', require("./authentication/email"))
+// app.post('/login', require("./authentication/login")) //done
+// app.post('/signup', require("./authentication/signup"))
+// app.post('/reset_password', require('./authentication/resetPassword'))
+// app.post('/update_password', require('./authentication/updatePassword'))
+// app.get('/email/:key', require("./authentication/email"))
 
 //Recipient
 //app.post('/recipient/register', require("./recipient/register.js"))

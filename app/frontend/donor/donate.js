@@ -1,3 +1,6 @@
+var {user_model} = require('../../models')
+var db = require('../../util/mysql_connection')
+
 module.exports = async function donate(req, res) {
 	try {
         let amount = req.body.amount
@@ -11,7 +14,7 @@ module.exports = async function donate(req, res) {
         let result = db.connection.query(update_recipient, [amount, recipient_id]);
 
         let insert_transaction = "INSERT INTO `transaction` (`tx_type`, `amount`, `donor_id`, `recipient_id`, `category`, `purchase_order_id`, `date`) VALUES (1, ?, ?, ?, '', '', CURRENT_TIMESTAMP);"
-        let result = db.connection.query(insert_transaction, [amount, donor_id, recipient_id,]);
+        result = db.connection.query(insert_transaction, [amount, donor_id, recipient_id,]);
 
  	 	res.send({code: "Donation has been processed"})
  	}

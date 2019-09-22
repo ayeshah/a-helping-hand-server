@@ -1,3 +1,6 @@
+var {user_model} = require('../../models')
+var db = require('../../util/mysql_connection')
+
 module.exports = async function purchase(req, res) {
 	try {
         let amount = req.body.amount
@@ -17,7 +20,7 @@ module.exports = async function purchase(req, res) {
         let result = db.connection.query(update_recipient, [savings[0] - amount, recipient_id]);
 
 		let insert_purchase_order = "INSERT INTO `purchase_order` (`retailer`, `timestamp`, `amount`, `items`, `receipt_image`) VALUES (?, CURRENT_TIMESTAMP, ?, '');"
-        let result = db.connection.query(insert_purchase_order, [retailer, amount]);
+        result = db.connection.query(insert_purchase_order, [retailer, amount]);
 
  	 	res.send({code: "Purchase has been processed"})
  	}
